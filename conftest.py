@@ -6,11 +6,12 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.webdriver.chrome.options import Options as OptionsChrome
 from selenium.webdriver.firefox.options import Options as OptionsFirefox
 
+
 def pytest_addoption(parser):
     parser.addoption('--browser_name', action='store',
                      default="chrome", help="Choose browser: Chrome or Firefox")
     parser.addoption('--language', action='store',
-                     default="en", help="Choose language")
+                     default="ru", help="Choose language")
 
 
 @pytest.fixture(scope="function")
