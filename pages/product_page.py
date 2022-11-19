@@ -19,8 +19,8 @@ class ProductPage(BasePage):
         alert.accept()
         try:
             alert = self.browser.switch_to.alert
-            # alert_text = alert.text
-            # print(f"Your code: {alert_text}")
+            alert_text = alert.text
+            print(f"Your code: {alert_text}")
             alert.accept()
         except NoAlertPresentException:
             print("No second alert presented")
