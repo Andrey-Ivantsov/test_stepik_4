@@ -18,3 +18,4 @@ class ProductPageLocators():
     BOOK_PRICE = (By.CSS_SELECTOR, ".product_main .price_color")
     ADDED_BOOK_PRICE = (
         By.CSS_SELECTOR, ".alert:nth-child(3) .alertinner strong")
+    SUCCESS_MESSAGE = (By.CSS_SELECTOR, ".alert-success:nth-child(1)")
