@@ -1,6 +1,7 @@
 from .pages.product_page import ProductPage
 from .pages.basket_page import BasketPage
-
+from .pages.login_page import LoginPage
+from faker import Faker
 import time
 import pytest
 
@@ -72,3 +73,31 @@ def test_guest_cant_see_product_in_basket_opened_from_product_page(browser):
     basket_page = BasketPage(browser, browser.current_url)
     basket_page.should_not_be_added_product()
     basket_page.should_be_empty_basket()
+
+
+@pytest.mark.login
+class TestUserAddToBasketFromProductPage():
+    @pytest.fixture(scope="function", autouse=True)
+    def setup(self, browser):
+        f = Faker()
+        print(f)
+        self.link = "http://selenium1py.pythonanywhere.com/ru/accounts/login/"
+        self.login_page = LoginPage(browser, self.link)
+        self.login_page.open()
+        self.login_page.register_new_user(f.email(), f.name())
+        time.sleep(5)
+        self.login_page.should_be_authorized_user()
+
+    def test_user_cant_see_success_message(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/#"
+        page = ProductPage(browser, link)
+        page.open()
+        page.should_not_be_success_message()
+
+    def test_user_can_add_product_to_basket(self, browser):
+        link = "http://selenium1py.pythonanywhere.com/ru/catalogue/coders-at-work_207/#"
+        page = ProductPage(browser, link)
+        page.open()
+        page.add_to_basket()
+        # page.solve_quiz_and_get_code()
+        page.should_add_the_right_book()
