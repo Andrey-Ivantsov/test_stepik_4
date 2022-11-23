@@ -8,6 +8,7 @@ from .pages.login_page import LoginPage
 from .pages.basket_page import BasketPage
 import time
 
+
 @pytest.mark.login_guest
 class TestLoginFromMainPage():
     def test_guest_should_see_login_link(self, browser):
